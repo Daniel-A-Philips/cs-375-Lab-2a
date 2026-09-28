@@ -4,11 +4,15 @@
     <meta charset="utf-8">
     <title>Starter</title>
     <style type="text/css">
-        /* TODO */
+        td{
+            padding: 10px; text-align: left; border: 1px solid black; border-left: 1px solid black;
+        }
     </style>
 </head>
 <body>
 <div id="count-container">0</div>
+<button id="start">Start</button>
+<button id="stop">Stop</button>
 
 <table>
     <tbody id="number-grid"></tbody>
@@ -29,7 +33,62 @@
     }
 
     // TODO
+    
 
+    let startButton = document.getElementById('start');
+    let stopButton = document.getElementById('stop');
+    let counterId = -1;
+    let counterContainer = document.getElementById("count-container");
+    let count = 0;
+    
+    startButton.addEventListener('click', function (event) {
+        if(counterId != -1) return;
+        counterId = setInterval(() => {
+            counterContainer.textContent = ++count;
+        }, 500);
+
+    })
+    
+    
+
+    stopButton.addEventListener('click', function (event) {
+        clearInterval(counterId);
+        counterId = -1;
+    });
+
+    function createEmptyTable() {
+        let table = document.getElementById("number-grid")
+        for(let i = 0; i < numberGrid.length; i++)
+        {
+            let currentRow = document.createElement("tr")
+            for(let k = 0; k < numberGrid[i].length; k++)
+            {
+                currentRow.append(document.createElement("td"));
+                
+            }
+            table.append(currentRow);
+        }   
+    }
+    
+    function fillTable() {
+        let table = document.getElementById("number-grid")
+        for(let i = 0; i < numberGrid.length; i++)
+        {
+            let currentRow = table.children[i];
+            for(let k = 0; k < numberGrid[i].length; k++)
+            {
+                currentRow.children[k].textContent = numberGrid[i][k];
+            }
+        }
+    }
+    createEmptyTable();
+    fillTable()
+    let incrementButton = document.getElementById("increment");
+    incrementButton.addEventListener("click", incrementGrid);
+    incrementButton.addEventListener("click", fillTable);
+    
+    
+    
 </script>
 </body>
 </html>
